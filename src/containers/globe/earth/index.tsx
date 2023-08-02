@@ -1,5 +1,6 @@
 'use client'
 
+import { useRadius } from "@/hooks/constants";
 import { useTexture } from "@react-three/drei";
 import { useThree } from "@react-three/fiber"
 
@@ -11,15 +12,10 @@ export default function Earth() {
     specularMap: '/earth/8081_earthspec2k.jpg',
   });
 
-
-
-  // Radius
-  const { viewport } = useThree();
-  const size = Math.min(viewport.width, viewport.height);
-  const radius = size / 3;
+  const radius = useRadius();
 
   return (
-    <mesh>
+    <mesh receiveShadow>
       <sphereGeometry args={[radius, 64, 64]} />
       <meshStandardMaterial
         map={texture.map}
@@ -31,7 +27,6 @@ export default function Earth() {
         roughness={0}
         metalness={0.5}
         transparent
-
       />
     </mesh>
   )

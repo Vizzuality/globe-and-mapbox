@@ -16,7 +16,8 @@ export default function Satellite({
 
   const radius = useRadius();
   const radiusOffset = 0.5 * scale;
-  const center = new Vector3(0, 0, 0);
+  const v_scale = new Vector3(scale, scale, scale);
+  const v_center = new Vector3(0, 0, 0);
 
 
   const initialTime = useMemo(() => {
@@ -24,7 +25,7 @@ export default function Satellite({
   }, []);
 
   const ringGeometry = useMemo(() => {
-    const g = new RingGeometry((radius + radiusOffset), radius + radiusOffset + 0.01, 32, 32);
+    const g = new RingGeometry((radius + radiusOffset), radius + radiusOffset + 0.01, 64, 64);
 
     g.rotateX(rotateX);
     g.rotateY(rotateY);
@@ -58,13 +59,13 @@ export default function Satellite({
 
     satelliteRef.current.position.copy(path.getPoint(t));
 
-    satelliteRef.current.lookAt(center);
+    satelliteRef.current.lookAt(v_center);
   });
 
   return (
     <>
-      <mesh ref={satelliteRef} scale={new Vector3(scale, scale, scale)} castShadow>
-        <torusGeometry args={[0.05, 0.01, 64, 64]} />
+      <mesh ref={satelliteRef} scale={v_scale.divideScalar(3)} castShadow>
+        <sphereGeometry args={[0.05, 64, 64]} />
         <meshStandardMaterial color="white" side={2} />
       </mesh>
 

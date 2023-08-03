@@ -1,6 +1,6 @@
 'use client'
 
-import Satellite from "@/containers/globe/satellite"
+import Satellite from "@/containers/globe/satellites/satellite"
 import { useMemo } from "react"
 
 export default function Satellites() {

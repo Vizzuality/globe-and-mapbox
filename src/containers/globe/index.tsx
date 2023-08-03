@@ -5,6 +5,7 @@ import { OrbitControls } from "@react-three/drei";
 
 import Earth from "@/containers/globe/earth";
 import Satellites from "@/containers/globe/satellites";
+import Marker from "@/containers/globe/marker";
 
 export default function Globe() {
   return (
@@ -27,6 +28,16 @@ export default function Globe() {
         <Earth />
 
         <Satellites />
+
+        <Marker lat={40.4168} lng={-3.7038} />
+        <Marker lat={-23.5505} lng={-46.6333} />
+        <Marker lat={-19.9167} lng={-43.9333} />
+        <Marker lat={-33.8688} lng={151.2093} />
+        <Marker lat={-22.9068} lng={-43.1729} />
+        <Marker lat={-34.6037} lng={-58.3816} />
+        <Marker lat={-12.0464} lng={-77.0428} />
+        <Marker lat={-33.4489} lng={-70.6693} />
+        …
 
         <OrbitControls
           minDistance={5}

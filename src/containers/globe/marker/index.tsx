@@ -29,7 +29,7 @@ export default function Marker({ lat = 0, lng = 0 }) {
   return (
     <mesh ref={markerRef} position={position}>
       <torusGeometry args={[0.02, 0.01, 64, 64]} />
-      <meshStandardMaterial color="red" />
+      <meshStandardMaterial color="white" />
     </mesh>
   )
 }

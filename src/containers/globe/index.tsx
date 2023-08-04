@@ -14,7 +14,7 @@ export default function Globe() {
         <ambientLight intensity={0.25} />
         <directionalLight
           position={[10, 10, 10]}
-          intensity={3}
+          intensity={2}
           castShadow
           shadow-mapSize-width={1920}
           shadow-mapSize-height={1920}

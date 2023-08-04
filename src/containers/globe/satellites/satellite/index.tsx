@@ -25,7 +25,7 @@ export default function Satellite({
   }, []);
 
   const ringGeometry = useMemo(() => {
-    const g = new RingGeometry((radius + radiusOffset), radius + radiusOffset + 0.01, 64, 64);
+    const g = new RingGeometry((radius + radiusOffset), radius + radiusOffset + 0.01, 16, 16);
 
     g.rotateX(rotateX);
     g.rotateY(rotateY);

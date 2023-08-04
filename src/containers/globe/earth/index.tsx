@@ -7,7 +7,7 @@ import { useThree } from "@react-three/fiber"
 export default function Earth() {
   // Textures
   const texture = useTexture({
-    map: '/earth/8081_earthmap2k.jpg',
+    map: '/earth/1_earth_8k.jpeg',
     displacementMap: '/earth/8081_earthbump2k.jpg',
     specularMap: '/earth/8081_earthspec2k.jpg',
   });

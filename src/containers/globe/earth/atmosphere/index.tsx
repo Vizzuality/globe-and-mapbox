@@ -22,7 +22,7 @@ export default function Atmosphere() {
   });
 
   // clamp between 0 and 1
-  const s = Math.max(0, Math.min(1, 1 - (progress * 5)));
+  const s = Math.max(0, Math.min(1, 1 - (progress * 3)));
 
   return (
     <mesh receiveShadow scale={new Vector3(s, s, s)}>

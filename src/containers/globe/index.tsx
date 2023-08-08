@@ -7,11 +7,15 @@ import Earth from "@/containers/globe/earth";
 import Satellites from "@/containers/globe/satellites";
 import Marker from "@/containers/globe/marker";
 import Atmosphere from "@/containers/globe/earth/atmosphere";
+import { Vector3 } from "three";
 
 export default function Globe() {
   return (
-    <div className="w-screen h-screen bg-gradient-radial from-sky-950 to-black">
-      <Canvas shadows>
+    <div className="absolute top-0 left-0 w-screen h-screen z-10">
+      <Canvas
+        shadows
+        camera={{ position: [0, 0, 4] }}
+      >
         <ambientLight intensity={0.5} />
         <directionalLight
           position={[10, 10, 10]}
@@ -39,9 +43,10 @@ export default function Globe() {
         <Marker lat={-34.6037} lng={-58.3816} />
         <Marker lat={-12.0464} lng={-77.0428} />
         <Marker lat={-33.4489} lng={-70.6693} />
-        …
 
         <OrbitControls
+          position={[0, 0, 7]}
+          position0={new Vector3(0, 0, 7)}
           minDistance={5}
           maxDistance={7}
           minPolarAngle={Math.PI / 4}

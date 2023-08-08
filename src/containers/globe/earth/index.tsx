@@ -17,9 +17,9 @@ export default function Earth() {
     // const geometry = new BoxGeometry(1, 1, 1, 100, 100, 100);
     // const geometry = new SphereGeometry(1, 100, 100);
     // const geometry = new PlaneGeometry(1, 1, 100, 100);
-    const nonIndexedGeometry = geometry.toNonIndexed();
+    // const nonIndexedGeometry = geometry.toNonIndexed();
 
-    let count = nonIndexedGeometry.attributes.position.count || 0;
+    let count = geometry.attributes.position.count || 0;
     let randoms = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i+=3) {
@@ -29,9 +29,9 @@ export default function Earth() {
       randoms[i+2] = r;
     }
 
-    nonIndexedGeometry.setAttribute('a_random', new BufferAttribute(randoms, 1));
+    geometry.setAttribute('a_random', new BufferAttribute(randoms, 1));
 
-    return nonIndexedGeometry;
+    return geometry;
 
   }, [radius]);
 

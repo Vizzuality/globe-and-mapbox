@@ -16,7 +16,7 @@ export default function EarthMaterial() {
 
   // Textures
   const texture = useTexture({
-    map: '/earth/1_earth_8k.jpeg',
+    map: '/earth/1_earth_8k.jpg',
     displacementMap: '/earth/8081_earthbump2k.jpg',
     specularMap: '/earth/8081_earthspec2k.jpg',
   });

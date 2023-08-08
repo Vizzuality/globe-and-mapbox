@@ -6,12 +6,13 @@ import { OrbitControls } from "@react-three/drei";
 import Earth from "@/containers/globe/earth";
 import Satellites from "@/containers/globe/satellites";
 import Marker from "@/containers/globe/marker";
+import Atmosphere from "@/containers/globe/earth/atmosphere";
 
 export default function Globe() {
   return (
     <div className="w-screen h-screen bg-gradient-radial from-sky-950 to-black">
       <Canvas shadows>
-        <ambientLight intensity={0.25} />
+        <ambientLight intensity={0.5} />
         <directionalLight
           position={[10, 10, 10]}
           intensity={2}
@@ -26,6 +27,7 @@ export default function Globe() {
         />
 
         <Earth />
+        <Atmosphere />
 
         <Satellites />
 

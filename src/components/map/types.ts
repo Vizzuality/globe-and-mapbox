@@ -1,8 +1,9 @@
-import type { ViewState, MapProps, FitBoundsOptions, MapboxMap } from 'react-map-gl';
+import { FitBoundsOptions, Map } from 'mapbox-gl';
+import type { ViewState, MapProps } from 'react-map-gl';
 export interface CustomMapProps extends MapProps {
   id: string;
   /** A function that returns the map instance */
-  children?: (map: MapboxMap) => React.ReactNode;
+  children?: (map: Map) => React.ReactNode;
 
   /** Custom css class for styling */
   className?: string;

@@ -34,8 +34,10 @@ const MapboxLayer = ({ beforeId, config, onAdd, onRemove }: MapboxLayerProps) =>
   if (!SOURCE || !STYLES) return null;
 
   return (
+    // @ts-ignore
     <Source {...SOURCE}>
       {STYLES.map((layer) => (
+        // @ts-ignore
         <Layer key={layer.id} {...layer} beforeId={beforeId} />
       ))}
       {!STYLES.length && SOURCE.type === 'raster' && <Layer type="raster" beforeId={beforeId} />}

@@ -48,6 +48,9 @@ export default function Marker({ id, geometry: { coordinates: [lng, lat] } }: Ge
     <motion.mesh
       ref={markerRef}
       position={position}
+      initial={{
+        scale: 0,
+      }}
       animate={{
         scale: story ? 0 : 1,
       }}

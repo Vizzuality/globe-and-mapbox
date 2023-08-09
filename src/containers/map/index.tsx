@@ -1,12 +1,13 @@
 'use client'
 
-import { motion } from "framer-motion";
+import { m, motion } from "framer-motion";
 
 import MapMapbox from "@/components/map";
 import { useGlobeStore } from "@/store";
 import { useMemo } from "react";
 import { markers } from "@/constants/markers";
 import { MapProvider } from "react-map-gl";
+import { LinearMipMapNearestFilter } from "three";
 
 export default function Map() {
   const story = useGlobeStore(state => state.story);

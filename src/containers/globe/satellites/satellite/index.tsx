@@ -69,6 +69,9 @@ export default function Satellite({
     <>
       <motion.mesh
         ref={satelliteRef}
+        initial={{
+          scale: 0,
+        }}
         animate={{
           scale: story ? 0 : scale/3,
         }}

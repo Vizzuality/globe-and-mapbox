@@ -64,6 +64,7 @@ export const MapMapbox: FC<CustomMapProps> = ({
   }, 250);
 
   const handleFitBounds = useCallback(() => {
+    console.log('handleFitBounds');
     if (mapRef && bounds) {
       const { bbox, options } = bounds;
       // enabling fly mode avoids the map to be interrupted during the bounds transition

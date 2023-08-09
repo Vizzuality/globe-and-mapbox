@@ -1,7 +1,7 @@
 'use client'
 
 import Marker from "@/containers/globe/markers/marker"
-import { markers } from "@/containers/globe/markers/constants"
+import { markers } from "@/constants/markers"
 
 
 export default function Markers() {

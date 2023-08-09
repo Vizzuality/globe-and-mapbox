@@ -9,7 +9,7 @@ export function useP(to: number, duration: number = 1, delay: number = 0) {
       duration,
       delay,
     })
-  }, [p, to, duration]);
+  }, [p, to, duration, delay]);
 
 
   return p;

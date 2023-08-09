@@ -8,39 +8,36 @@ import CustomShaderMaterial from 'three-custom-shader-material'
 import VERTEX from './vertex.glsl';
 import FRAGMENT from './fragment.glsl';
 
-import { useRef } from "react";
-import { useControls } from "leva";
+import { useMemo, useRef } from "react";
+import { useGlobeStore } from "@/store";
+import { useMotionValueEvent } from "framer-motion";
+import { useP } from "@/hooks/animations";
 
 export default function EarthMaterial() {
+  const story = useGlobeStore(state => state.story);
+  const pMotion = useP(story ? 1 : 0);
+
   const materialRef = useRef<any>(null); // TODO: type
 
   // Textures
   const texture = useTexture({
-    map: '/earth/1_earth_8k.jpg',
+    map: '/earth/1_earth_2k.jpg',
     displacementMap: '/earth/8081_earthbump2k.jpg',
     specularMap: '/earth/8081_earthspec2k.jpg',
   });
 
-  useControls({
-    progress: {
-      value: 0,
-      min: 0,
-      max: 1,
-      step: 0.01,
-      onChange: (value) => {
-        if (!materialRef.current) return;
+  const uniforms = useMemo(() => ({
+    u_progress: { value: 0 },
+    u_time: { value: 0 },
+    u_texture: { value: texture.map },
+  }), [texture.map]);
 
-        materialRef.current.uniforms.u_progress.value = value;
-      }
-    }
-  })
 
-  // useFrame(({ clock }) => {
-  //   if (!materialRef.current) return;
+  useMotionValueEvent(pMotion, 'change', (v) => {
+    if (!materialRef.current) return;
 
-  //   materialRef.current.uniforms.u_time.value = clock.getElapsedTime();
-  // });
-
+    materialRef.current.uniforms.u_progress.value = v;
+  });
 
   return (
     <CustomShaderMaterial
@@ -48,11 +45,7 @@ export default function EarthMaterial() {
       baseMaterial={MeshStandardMaterial}
       vertexShader={VERTEX}
       fragmentShader={FRAGMENT}
-      uniforms={{
-        u_progress: { value: 0 },
-        u_time: { value: 0 },
-        u_texture: { value: texture.map },
-      }}
+      uniforms={uniforms}
       flatShading
       map={texture.map}
       displacementMap={texture.displacementMap}

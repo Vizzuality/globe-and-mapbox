@@ -4,6 +4,8 @@ import { useRadius } from "@/hooks/constants";
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import { CurvePath, LineCurve3, Mesh, RingGeometry, Vector3 } from "three";
+import { motion } from "framer-motion-3d";
+import { useGlobeStore } from "@/store";
 
 export default function Satellite({
   speed = 1,
@@ -12,11 +14,12 @@ export default function Satellite({
   rotateY = 0,
   rotateZ = 0,
 }) {
-  const satelliteRef = useRef<Mesh>(null);
+  const story = useGlobeStore(state => state.story);
+  const satelliteRef = useRef<any>(null);
+
 
   const radius = useRadius();
   const radiusOffset = 0.5 * scale;
-  const v_scale = new Vector3(scale, scale, scale);
   const v_center = new Vector3(0, 0, 0);
 
 
@@ -64,10 +67,20 @@ export default function Satellite({
 
   return (
     <>
-      <mesh ref={satelliteRef} scale={v_scale.divideScalar(3)} castShadow>
+      <motion.mesh
+        ref={satelliteRef}
+        animate={{
+          scale: story ? 0 : scale/3,
+        }}
+        castShadow
+        transition={{
+          duration: 0.5,
+          delay: story ? 0 : 1
+        }}
+      >
         <sphereGeometry args={[0.05, 64, 64]} />
         <meshStandardMaterial color="white" side={2} />
-      </mesh>
+      </motion.mesh>
 
       {/* <mesh geometry={ringGeometry}>
         <meshStandardMaterial color="white" side={2} />

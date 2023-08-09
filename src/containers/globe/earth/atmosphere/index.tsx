@@ -5,38 +5,43 @@ import { AdditiveBlending, BackSide, Vector3 } from "three";
 
 import VERTEX from './vertex.glsl';
 import FRAGMENT from './fragment.glsl';
-import { useControls } from "leva";
+import { useGlobeStore } from "@/store";
+import { useP } from "@/hooks/animations";
+import { useMotionValueEvent } from "framer-motion";
+import { useMemo, useRef } from "react";
 
 export default function Atmosphere() {
-  const radius = useRadius();
+  const materialRef = useRef<any>(null); // TODO: type
 
-  const {
-    progress,
-  } = useControls({
-    progress: {
-      value: 0,
-      min: 0,
-      max: 1,
-      step: 0.01,
-    }
+  const radius = useRadius();
+  const r = radius + (radius * 0.025);
+
+  const story = useGlobeStore(state => state.story);
+  const pMotion = useP(story ? 1 : 0, 0.25, story ? 0 : 0.75);
+
+  const uniforms = useMemo(() => ({
+    u_progress: { value: 0 },
+    u_radius: { value: r },
+  }), [r]);
+
+  useMotionValueEvent(pMotion, 'change', (v) => {
+    if (!materialRef.current) return;
+
+    materialRef.current.uniforms.u_progress.value = v;
   });
 
-  // clamp between 0 and 1
-  const s = Math.max(0, Math.min(1, 1 - (progress * 3)));
-
   return (
-    <mesh receiveShadow scale={new Vector3(s, s, s)}>
-      <sphereGeometry args={[radius + (radius * 0.025), 64, 64]} />
+    <mesh receiveShadow>
+      <sphereGeometry args={[r, 64, 64]} />
 
       <shaderMaterial
+        ref={materialRef}
         vertexShader={VERTEX}
         fragmentShader={FRAGMENT}
+        uniforms={uniforms}
         transparent
         blending={AdditiveBlending}
         side={BackSide}
-        uniforms={{
-          u_progress: { value: progress },
-        }}
       />
     </mesh>
 

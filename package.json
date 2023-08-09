@@ -20,6 +20,8 @@
     "clsx": "^2.0.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
+    "framer-motion": "^10.15.1",
+    "framer-motion-3d": "^10.15.1",
     "glslify": "^7.1.1",
     "leva": "^0.9.35",
     "lucide-react": "^0.265.0",

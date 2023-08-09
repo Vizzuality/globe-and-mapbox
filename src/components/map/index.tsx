@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, FC } from 'react';
 
-import ReactMapGL, { ViewState, ViewStateChangeEvent, MapEvent, useMap } from 'react-map-gl';
+import ReactMapGL, { ViewState, ViewStateChangeEvent, MapEvent, useMap, Source } from 'react-map-gl';
 
 // * If you plan to use Mapbox (and not a fork):
 // * 1) remove maplibre-gl,
@@ -152,6 +152,11 @@ export const MapMapbox: FC<CustomMapProps> = ({
         {...mapboxProps}
         {...localViewState}
       >
+        <Source
+          id="mapbox-dem"
+          type="raster-dem"
+          url="mapbox://mapbox.mapbox-terrain-dem-v1"
+        />
         {!!mapRef && loaded && !!children && children(mapRef.getMap())}
       </ReactMapGL>
     </div>
